@@ -86,7 +86,7 @@ ultimo_numero = len(num_artistas.index) + 1
 
 # rango_celdas = 'B2:B{}'.format()
 
-rango_celdas = f'B2:B{ultimo_numero}'
+rango_celdas = f'B2:B{ultimo_numero}' # B2:B85
 
 print(rango_celdas)
 
