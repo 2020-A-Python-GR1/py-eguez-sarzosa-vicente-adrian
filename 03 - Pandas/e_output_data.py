@@ -62,25 +62,25 @@ writer.save()
 
 # Formato condicional #
 
-num_artistas = sub_df['artist'].value_counts()
+path_excel_colores = "/home/dev-11/Documents/Github/py-eguez-sarzosa-vicente-adrian/03 - Pandas/data/artwork_data_colores.xlsx"
 
+# artwork_data_colores.xlsx
+
+writer = pd.ExcelWriter(path_excel_colores, engine='xlsxwriter')
+# Series
+
+num_artistas = sub_df['artist'].value_counts()
 
 print(type(num_artistas))
 print(num_artistas)
 
-path_excel_colores = "/home/dev-11/Documents/Github/py-eguez-sarzosa-vicente-adrian/03 - Pandas/data/artwork_data_colores.xlsx"
-# artwork_data_colores.xlsx
+num_artistas.to_excel(writer, sheet_name = 'Artistas')
 
-writer = pd.ExcelWriter(path_excel_colores,
-                            engine='xlsxwriter')
-# Series
-
-num_artistas.to_excel(writer, 
-                      sheet_name = 'Artistas')
-
-# Seleccionando la hoja de trabajo
+# Seleccionando la hoja de trabajo #
 
 hoja_artistas = writer.sheets['Artistas']
+
+# Formato #
 
 ultimo_numero = len(num_artistas.index) + 1
 
@@ -90,8 +90,6 @@ rango_celdas = f'B2:B{ultimo_numero}'
 
 print(rango_celdas)
 
-# Formato
-
 formato_artistas = {
         "type": "2_color_scale",
         "min_value": "10",
@@ -99,8 +97,7 @@ formato_artistas = {
         "max_value": "99",
         "max_type": "percentile"}
 
-hoja_artistas.conditional_format(rango_celdas,
-                                 formato_artistas)
+hoja_artistas.conditional_format(rango_celdas, formato_artistas)
 
 writer.save()
 
