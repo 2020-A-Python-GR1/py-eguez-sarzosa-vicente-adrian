@@ -87,6 +87,7 @@ ultimo_numero = len(num_artistas.index) + 1
 # rango_celdas = 'B2:B{}'.format()
 
 rango_celdas = f'B2:B{ultimo_numero}' # B2:B85
+rango_celdas_c = f'C2:C{ultimo_numero}' # C2:C85
 
 print(rango_celdas)
 
@@ -98,7 +99,37 @@ formato_artistas = {
         "max_type": "percentile"}
 
 hoja_artistas.conditional_format(rango_celdas, formato_artistas)
+hoja_artistas.conditional_format(rango_celdas_c, formato_artistas)
 
 writer.save()
+
+########## SQL ##########
+
+with sqlite3.connect("bdd_artist.bdd") as conexion:
+    sub_df.to_sql('py_artistas', conexion)
+    
+
+## with mysql.connect('mysql://user:password@ip:puerto/nombre_base')
+##      df5.to_sql('tabla_mysql', conexion)
+    
+########## JSON ##########
+
+sub_df.to_json('artistas.json')
+
+sub_df.to_json('artistas_tabla.json', orient = 'table')
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
