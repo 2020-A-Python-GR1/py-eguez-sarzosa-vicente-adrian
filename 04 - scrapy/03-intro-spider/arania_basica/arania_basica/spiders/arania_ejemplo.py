@@ -21,3 +21,5 @@ class IntroSpider(scrapy.Spider):
         print(titulos)
 
 # scrapy crawl nombre_arania
+# Buscar el precio, url de imagen, si está en stock y opcional el número de estrellas
+
