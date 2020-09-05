@@ -37,7 +37,24 @@ class AraniaCrawlOnu(CrawlSpider):
         # Parametro Vacio
     )
 
-    rules = regla_dos # Heredada
+    segmentos_restringidos = (
+        'ar/sections',
+        'zh/sections',
+        'ru/sections'
+    )
+
+    regla_tres = (
+        Rule(
+            LinkExtractor(
+                allow_domains = allowed_domains,
+                allow = segmentos_url_permitidos,
+                deny = segmentos_restringidos
+            ), callback = 'parse_page'
+        ),
+        # Parametro Vacio
+    )
+
+    rules = regla_tres # Heredada
 
     def parse_page(self, response):
         lista_programas = response.css('div.field-items > div.field-item > h4::text').extract()
