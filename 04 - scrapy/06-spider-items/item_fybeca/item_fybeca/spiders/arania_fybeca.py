@@ -26,6 +26,9 @@ class AraniaFybeca(scrapy.Spider):
                     item = ProductoFybeca(), # Clase item
                     selector = producto # Selector por defecto
                 )
+
+                producto_loader.default_output_processor = TakeFirst() # No guardar el arreglo
+
                 producto_loader.add_css(
                     'titulo', # Nombre propiedad del item
                     'a.name::text' # Css para obtener el dato
